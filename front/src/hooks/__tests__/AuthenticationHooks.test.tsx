@@ -1,5 +1,8 @@
 import { renderHook } from '@testing-library/react';
-import AuthenticationHooks from '../AuthenticationHooks';
+import {
+  useIsNotLoggedIn,
+  useGetUserEmailFromToken,
+} from '../AuthenticationHooks';
 import { useAuth0 } from '@auth0/auth0-react';
 import { mocked } from 'jest-mock';
 
@@ -32,7 +35,6 @@ describe('useIsNotLoggedIn', () => {
       isLoading: true,
     });
 
-    const { useIsNotLoggedIn } = AuthenticationHooks;
     const { result } = renderHook(() => useIsNotLoggedIn());
     const isNotLoggedIn = result.current;
 
@@ -53,7 +55,6 @@ describe('useIsNotLoggedIn', () => {
       isLoading: false,
     });
 
-    const { useIsNotLoggedIn } = AuthenticationHooks;
     const { result } = renderHook(() => useIsNotLoggedIn());
     const isNotLoggedIn = result.current;
 
@@ -75,7 +76,6 @@ describe('useIsNotLoggedIn', () => {
     });
 
     window.localStorage.setItem('accessToken', 'token');
-    const { useIsNotLoggedIn } = AuthenticationHooks;
     const { result } = renderHook(() => useIsNotLoggedIn());
     const isNotLoggedIn = result.current;
 
@@ -97,10 +97,33 @@ describe('useIsNotLoggedIn', () => {
     });
 
     window.localStorage.setItem('accessToken', 'token');
-    const { useIsNotLoggedIn } = AuthenticationHooks;
     const { result } = renderHook(() => useIsNotLoggedIn());
     const isNotLoggedIn = result.current;
 
     expect(isNotLoggedIn).toBe(false);
+  });
+});
+
+describe('useGetUserEmailFromToken', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    jest.resetModules();
+  });
+
+  it('returns undefined if token is not there', () => {
+    const { result } = renderHook(() => useGetUserEmailFromToken());
+    const email = result.current;
+
+    expect(email).toBe(undefined);
+  });
+
+  it('returns email if token is there', () => {
+    window.localStorage.setItem(
+      'accessToken',
+      '***REMOVED***',
+    );
+    const { result } = renderHook(() => useGetUserEmailFromToken());
+
+    expect(result.current).toBe('charles@ouihelp.twenty.com');
   });
 });
