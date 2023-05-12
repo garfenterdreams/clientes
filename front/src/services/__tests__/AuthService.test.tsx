@@ -3,6 +3,7 @@ import {
   hasAccessToken,
   hasRefreshToken,
   refreshAccessToken,
+  getUserIdFromToken,
 } from '../AuthService';
 
 const mockFetch = async (
@@ -61,6 +62,26 @@ it('refreshToken refreshes the token if refresh token is valid', async () => {
   await waitFor(() => {
     expect(localStorage.getItem('accessToken')).toBe('xxx-valid-access');
   });
+});
+
+it('getUserIdFromToken returns null when the token is not present', async () => {
+  const userId = getUserIdFromToken();
+  expect(userId).toBeNull();
+});
+
+it('getUserIdFromToken returns null when the token is not valid', async () => {
+  localStorage.setItem('accessToken', 'xxx-invalid-access');
+  const userId = getUserIdFromToken();
+  expect(userId).toBeNull();
+});
+
+it('getUserIdFromToken returns the right userId when the token is valid', async () => {
+  localStorage.setItem(
+    'accessToken',
+    '***REMOVED***',
+  );
+  const userId = getUserIdFromToken();
+  expect(userId).toBe('16506ba8-196c-4c13-a4a7-a22cb5eccfa1');
 });
 
 afterEach(() => {

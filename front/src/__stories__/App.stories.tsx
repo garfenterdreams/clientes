@@ -10,12 +10,18 @@ const component = {
 };
 
 localStorage.setItem('refreshToken', 'xxx-refresh');
-localStorage.setItem('accessToken', 'xxx-access');
+localStorage.setItem(
+  'accessToken',
+  '***REMOVED***',
+);
 
 const mocks = [
   {
     request: {
       query: GET_CURRENT_USER,
+      variables: {
+        uuid: '16506ba8-196c-4c13-a4a7-a22cb5eccfa1',
+      },
     },
     result: {
       data: {
