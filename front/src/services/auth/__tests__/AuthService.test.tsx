@@ -81,7 +81,7 @@ it('getUserIdFromToken returns the right userId when the token is valid', async 
     '***REMOVED***',
   );
   const userId = getUserIdFromToken();
-  expect(userId).toBe('16506ba8-196c-4c13-a4a7-a22cb5eccfa1');
+  expect(userId).toBe('b7590db9-ac7d-4275-9c6c-323979192795');
 });
 
 afterEach(() => {

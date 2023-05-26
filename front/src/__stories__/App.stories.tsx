@@ -20,14 +20,14 @@ const mocks = [
     request: {
       query: GET_CURRENT_USER,
       variables: {
-        uuid: '16506ba8-196c-4c13-a4a7-a22cb5eccfa1',
+        uuid: 'b7590db9-ac7d-4275-9c6c-323979192795',
       },
     },
     result: {
       data: {
         users: [
           {
-            id: '16506ba8-196c-4c13-a4a7-a22cb5eccfa1',
+            id: 'b7590db9-ac7d-4275-9c6c-323979192795',
             email: 'charles@twenty.com',
             displayName: 'Charles Bochet',
             workspace_member: {
