@@ -8,7 +8,6 @@ const meta: Meta<typeof ApiKeyInput> = {
   component: ApiKeyInput,
   decorators: [ComponentDecorator],
   args: {
-    expiresAt: '2123-11-06T23:59:59.825Z',
     apiKey:
       '***REMOVED***',
   },
