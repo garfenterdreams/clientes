@@ -2,11 +2,12 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { ApiKeyInput } from '@/settings/developers/components/ApiKeyInput';
 import { ComponentDecorator } from '~/testing/decorators/ComponentDecorator';
+import { SnackBarDecorator } from '~/testing/decorators/SnackBarDecorator';
 
 const meta: Meta<typeof ApiKeyInput> = {
   title: 'Pages/Settings/Developers/ApiKeys/ApiKeyInput',
   component: ApiKeyInput,
-  decorators: [ComponentDecorator],
+  decorators: [ComponentDecorator, SnackBarDecorator],
   args: {
     apiKey:
       '***REMOVED***',
