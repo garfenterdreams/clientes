@@ -1,5 +1,5 @@
 {
-  "name": "twenty",
+  "name": "twenty-front",
   "version": "0.2.1",
   "private": true,
   "type": "module",
@@ -30,8 +30,7 @@
     "storybook:pages:coverage": "STORYBOOK_SCOPE=pages yarn storybook:coverage",
     "graphql:data:generate": "dotenv cross-var graphql-codegen -- --config codegen.cjs",
     "graphql:metadata:generate": "dotenv cross-var graphql-codegen -- --config codegen-metadata.cjs",
-    "chromatic": "dotenv cross-var npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
-    "install": "yarn eslint-plugin:setup"
+    "chromatic": "dotenv cross-var npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@air/react-drag-to-select": "^5.0.8",
@@ -141,7 +140,7 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.15",
-    "eslint-plugin-twenty": "file:../packages/eslint-plugin-twenty",
+    "eslint-plugin-twenty": "file:../eslint-plugin-twenty",
     "eslint-plugin-unused-imports": "^3.0.0",
     "http-server": "^14.1.1",
     "jest": "29.7.0",
@@ -174,6 +173,5 @@
   },
   "msw": {
     "workerDirectory": "public"
-  },
-  "packageManager": "yarn@1.22.19+sha256.732620bac8b1690d507274f025f3c6cfdc3627a84d9642e38a07452cc00e0f2e"
+  }
 }
