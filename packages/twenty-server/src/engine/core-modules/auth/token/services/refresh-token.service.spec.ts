@@ -136,7 +136,7 @@ describe('RefreshTokenService', () => {
       });
       expect(appTokenRepository.save).toHaveBeenCalled();
       expect(jwtWrapperService.sign).toHaveBeenCalledWith(
-        { sub: userId },
+        { sub: userId, workspaceId },
         expect.objectContaining({
           ***REMOVED***,
           expiresIn: mockExpiresIn,
