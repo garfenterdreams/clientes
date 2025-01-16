@@ -5,10 +5,21 @@ import { getSettingsPagePath } from '@/settings/utils/getSettingsPagePath';
 import { SettingsPath } from '@/types/SettingsPath';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/components/SubMenuTopBarContainer';
 import { useColorScheme } from '@/ui/theme/hooks/useColorScheme';
-import { DateTimeSettings } from '~/pages/settings/profile/appearance/components/DateTimeSettings';
+import { useIsFeatureEnabled } from '@/workspace/hooks/useIsFeatureEnabled';
 
-export const SettingsAppearance = () => {
+import { useLingui } from '@lingui/react/macro';
+import { FeatureFlagKey } from '~/generated/graphql';
+import { DateTimeSettings } from '~/pages/settings/profile/appearance/components/DateTimeSettings';
+import { LocalePicker } from '~/pages/settings/profile/appearance/components/LocalePicker';
+
+export const SettingsExperience = () => {
   const { colorScheme, setColorScheme } = useColorScheme();
+
+  const isLocalizationEnabled = useIsFeatureEnabled(
+    FeatureFlagKey.IsLocalizationEnabled,
+  );
+
+  const { t } = useLingui();
 
   return (
     <SubMenuTopBarContainer
@@ -33,6 +44,16 @@ export const SettingsAppearance = () => {
           />
           <DateTimeSettings />
         </Section>
+
+        {isLocalizationEnabled && (
+          <Section>
+            <H2Title
+              title={t`Language`}
+              description={t`Select your preferred language`}
+            />
+            <LocalePicker />
+          </Section>
+        )}
       </SettingsPageContainer>
     </SubMenuTopBarContainer>
   );
