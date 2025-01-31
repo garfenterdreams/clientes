@@ -36,6 +36,8 @@ const jestConfig: JestConfigWithTsJest = {
     APP_PORT: 4000,
     ACCESS_TOKEN:
       '***REMOVED***',
+    EXPIRED_ACCESS_TOKEN:
+      '***REMOVED***',
   },
 };
 
