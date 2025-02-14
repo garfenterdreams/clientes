@@ -58,9 +58,11 @@ const jestConfig: JestConfigWithTsJest = {
   },
   globals: {
     APP_PORT: 4000,
-    ACCESS_TOKEN:
+    ADMIN_ACCESS_TOKEN:
       '***REMOVED***',
     EXPIRED_ACCESS_TOKEN:
+      '***REMOVED***',
+    MEMBER_ACCESS_TOKEN:
       '***REMOVED***',
   },
 };
