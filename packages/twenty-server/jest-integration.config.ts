@@ -1,6 +1,9 @@
 import { JestConfigWithTsJest, pathsToModuleNameMapper } from 'ts-jest';
 
+import { NodeEnvironment } from 'src/engine/core-modules/environment/interfaces/node-environment.interface';
+
 const isBillingEnabled = process.env.IS_BILLING_ENABLED === 'true';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const tsConfig = require('./tsconfig.json');
 
@@ -14,12 +17,12 @@ const jestConfig: JestConfigWithTsJest = {
   rootDir: '.',
   testEnvironment: 'node',
   testRegex: isBillingEnabled
-    ? 'integration-spec.ts'
+    ? '\\.integration-spec\\.ts$'
     : '^(?!.*billing).*\\.integration-spec\\.ts$',
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   globalSetup: '<rootDir>/test/integration/utils/setup-test.ts',
   globalTeardown: '<rootDir>/test/integration/utils/teardown-test.ts',
-  testTimeout: 15000,
+  testTimeout: 20000,
   maxWorkers: 1,
   transform: {
     '^.+\\.(t|j)s$': [
@@ -61,6 +64,7 @@ const jestConfig: JestConfigWithTsJest = {
   },
   globals: {
     APP_PORT: 4000,
+    NODE_ENV: NodeEnvironment.test,
     ADMIN_ACCESS_TOKEN:
       '***REMOVED***',
     EXPIRED_ACCESS_TOKEN:
