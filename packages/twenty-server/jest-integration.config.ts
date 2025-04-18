@@ -70,6 +70,8 @@ const jestConfig: JestConfigWithTsJest = {
       '***REMOVED***',
     EXPIRED_ACCESS_TOKEN:
       '***REMOVED***',
+    INVALID_ACCESS_TOKEN:
+      '***REMOVED***',
     MEMBER_ACCESS_TOKEN:
       '***REMOVED***',
     GUEST_ACCESS_TOKEN:
