@@ -76,6 +76,8 @@ const jestConfig: JestConfigWithTsJest = {
       '***REMOVED***',
     GUEST_ACCESS_TOKEN:
       '***REMOVED***',
+    API_KEY_ACCESS_TOKEN:
+      '***REMOVED***',
   },
 };
 
