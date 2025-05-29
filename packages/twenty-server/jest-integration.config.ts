@@ -65,7 +65,7 @@ const jestConfig: JestConfigWithTsJest = {
   },
   globals: {
     APP_PORT: 4000,
-    NODE_ENV: NodeEnvironment.test,
+    NODE_ENV: NodeEnvironment.TEST,
     ADMIN_ACCESS_TOKEN:
       '***REMOVED***',
     EXPIRED_ACCESS_TOKEN:
