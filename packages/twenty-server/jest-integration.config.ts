@@ -74,15 +74,17 @@ const jestConfig: JestConfigWithTsJest = {
   globals: {
     APP_PORT: 4000,
     NODE_ENV: NodeEnvironment.TEST,
-    ADMIN_ACCESS_TOKEN:
+    APPLE_JANE_ADMIN_ACCESS_TOKEN:
       '***REMOVED***',
     EXPIRED_ACCESS_TOKEN:
       '***REMOVED***',
     INVALID_ACCESS_TOKEN:
       '***REMOVED***',
-    MEMBER_ACCESS_TOKEN:
+    APPLE_JONY_MEMBER_ACCESS_TOKEN:
       '***REMOVED***',
-    GUEST_ACCESS_TOKEN:
+    APPLE_PHIL_GUEST_ACCESS_TOKEN:
+      '***REMOVED***',
+    ACME_JONY_MEMBER_ACCESS_TOKEN:
       '***REMOVED***',
     API_KEY_ACCESS_TOKEN:
       '***REMOVED***',
