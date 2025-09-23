@@ -93,6 +93,8 @@ const jestConfig: JestConfigWithTsJest = {
       '***REMOVED***',
     API_KEY_ACCESS_TOKEN:
       '***REMOVED***',
+    APPLE_SARAH_IMPERSONATE_TIM_INVALID_ACCESS_TOKEN:
+      '***REMOVED***',
   },
 };
 
