@@ -1,0 +1,152 @@
+name: garfenter-clientes
+
+services:
+  garfenter-clientes-server:
+    image: twentycrm/twenty:${TAG:-latest}
+    container_name: garfenter-clientes-server
+    volumes:
+      - garfenter-server-storage:/app/packages/twenty-server/.local-storage
+    ports:
+      - "${SERVER_PORT:-3000}:3000"
+    environment:
+      NODE_PORT: 3000
+      PG_DATABASE_URL: postgres://${PG_DATABASE_USER:-postgres}:${PG_DATABASE_PASSWORD:-garfenter2024}@garfenter-postgres:5432/${PG_DATABASE_NAME:-garfenter_clientes}
+      SERVER_URL: ${SERVER_URL:-http://localhost:3000}
+      REDIS_URL: redis://garfenter-redis:6379
+
+      # Localization for Guatemala
+      DEFAULT_LOCALE: es
+      DEFAULT_CURRENCY: GTQ
+      TZ: America/Guatemala
+
+      # Storage configuration
+      STORAGE_TYPE: ${STORAGE_TYPE:-local}
+      STORAGE_S3_REGION: ${STORAGE_S3_REGION:-}
+      STORAGE_S3_NAME: ${STORAGE_S3_NAME:-}
+      STORAGE_S3_ENDPOINT: ${STORAGE_S3_ENDPOINT:-}
+
+      # Security
+      APP_SECRET: ${APP_SECRET:-garfenter_secret_change_in_production}
+
+      # Optional: Authentication providers (uncomment to enable)
+      # MESSAGING_PROVIDER_GMAIL_ENABLED: ${MESSAGING_PROVIDER_GMAIL_ENABLED:-false}
+      # CALENDAR_PROVIDER_GOOGLE_ENABLED: ${CALENDAR_PROVIDER_GOOGLE_ENABLED:-false}
+      # AUTH_GOOGLE_CLIENT_ID: ${AUTH_GOOGLE_CLIENT_ID}
+      # AUTH_GOOGLE_CLIENT_SECRET: ${AUTH_GOOGLE_CLIENT_SECRET}
+      # AUTH_GOOGLE_CALLBACK_URL: ${AUTH_GOOGLE_CALLBACK_URL}
+      # AUTH_GOOGLE_APIS_CALLBACK_URL: ${AUTH_GOOGLE_APIS_CALLBACK_URL}
+
+      # Optional: Email configuration (uncomment to enable)
+      # EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-contacto@garfenter.com}
+      # EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-"Garfenter CRM"}
+      # EMAIL_SYSTEM_ADDRESS: ${EMAIL_SYSTEM_ADDRESS:-sistema@garfenter.com}
+      # EMAIL_DRIVER: ${EMAIL_DRIVER:-smtp}
+      # EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-smtp.gmail.com}
+      # EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-465}
+      # EMAIL_SMTP_USER: ${EMAIL_SMTP_USER}
+      # EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD}
+
+    depends_on:
+      garfenter-postgres:
+        condition: service_healthy
+      garfenter-redis:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:3000/healthz || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - garfenter-network
+
+  garfenter-clientes-worker:
+    image: twentycrm/twenty:${TAG:-latest}
+    container_name: garfenter-clientes-worker
+    volumes:
+      - garfenter-server-storage:/app/packages/twenty-server/.local-storage
+    command: ["yarn", "worker:prod"]
+    environment:
+      PG_DATABASE_URL: postgres://${PG_DATABASE_USER:-postgres}:${PG_DATABASE_PASSWORD:-garfenter2024}@garfenter-postgres:5432/${PG_DATABASE_NAME:-garfenter_clientes}
+      SERVER_URL: ${SERVER_URL:-http://localhost:3000}
+      REDIS_URL: redis://garfenter-redis:6379
+      DISABLE_DB_MIGRATIONS: "true"
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+
+      # Localization for Guatemala
+      DEFAULT_LOCALE: es
+      DEFAULT_CURRENCY: GTQ
+      TZ: America/Guatemala
+
+      # Storage configuration
+      STORAGE_TYPE: ${STORAGE_TYPE:-local}
+      STORAGE_S3_REGION: ${STORAGE_S3_REGION:-}
+      STORAGE_S3_NAME: ${STORAGE_S3_NAME:-}
+      STORAGE_S3_ENDPOINT: ${STORAGE_S3_ENDPOINT:-}
+
+      # Security
+      APP_SECRET: ${APP_SECRET:-garfenter_secret_change_in_production}
+
+    depends_on:
+      garfenter-postgres:
+        condition: service_healthy
+      garfenter-clientes-server:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - garfenter-network
+
+  garfenter-postgres:
+    image: postgres:15-alpine
+    container_name: garfenter-postgres
+    volumes:
+      - garfenter-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${PG_DATABASE_NAME:-garfenter_clientes}
+      POSTGRES_USER: ${PG_DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_DATABASE_PASSWORD:-garfenter2024}
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: America/Guatemala
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_DATABASE_USER:-postgres} -d ${PG_DATABASE_NAME:-garfenter_clientes}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - garfenter-network
+
+  garfenter-redis:
+    image: redis:7-alpine
+    container_name: garfenter-redis
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - garfenter-redis-data:/data
+    environment:
+      TZ: America/Guatemala
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - garfenter-network
+
+networks:
+  garfenter-network:
+    name: garfenter-network
+    driver: bridge
+
+volumes:
+  garfenter-db-data:
+    name: garfenter-db-data
+  garfenter-redis-data:
+    name: garfenter-redis-data
+  garfenter-server-storage:
+    name: garfenter-server-storage
