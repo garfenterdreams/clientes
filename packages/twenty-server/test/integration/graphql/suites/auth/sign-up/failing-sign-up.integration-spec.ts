@@ -6,7 +6,7 @@ describe('Successful User Sign Up (integration)', () => {
     const { errors } = await signUp({
       input: {
         email: 'invalid-email',
-        ***REMOVED***,
+        password: 'Test123!@#',
       },
       expectToFail: true,
     });
@@ -22,7 +22,7 @@ describe('Successful User Sign Up (integration)', () => {
     const { data: firstSignUp } = await signUp({
       input: {
         email: testEmail,
-        ***REMOVED***,
+        password: 'Test123!@#',
       },
       expectToFail: false,
     });
@@ -34,7 +34,7 @@ describe('Successful User Sign Up (integration)', () => {
     const { errors } = await signUp({
       input: {
         email: testEmail,
-        ***REMOVED***,
+        password: 'AnotherPassword123!',
       },
       expectToFail: true,
     });

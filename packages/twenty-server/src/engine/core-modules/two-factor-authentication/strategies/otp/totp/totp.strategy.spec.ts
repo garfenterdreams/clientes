@@ -143,7 +143,7 @@ describe('TOTPStrategy Configuration', () => {
     it('should handle invalid secret gracefully', () => {
       const invalidContext = {
         status: OTPStatus.VERIFIED,
-        ***REMOVED***,
+        secret: 'invalid-secret',
       };
 
       // The authenticator.check method doesn't throw for invalid secrets,

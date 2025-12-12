@@ -98,7 +98,7 @@ describe('WorkspaceAgnosticToken', () => {
           type: 'WORKSPACE_AGNOSTIC',
         },
         expect.objectContaining({
-          ***REMOVED***,
+          secret: 'mocked-secret',
           expiresIn: mockExpiresIn,
         }),
       );
@@ -151,7 +151,7 @@ describe('WorkspaceAgnosticToken', () => {
       expect(jwtWrapperService.verify).toHaveBeenCalledWith(
         mockToken,
         expect.objectContaining({
-          ***REMOVED***,
+          secret: 'mocked-secret',
         }),
       );
       expect(userRepository.findOne).toHaveBeenCalledWith({

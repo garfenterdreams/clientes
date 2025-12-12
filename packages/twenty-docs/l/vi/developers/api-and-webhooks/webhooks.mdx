@@ -79,7 +79,7 @@ Chữ ký này là một băm HMAC SHA256 của payload yêu cầu, được tí
 const crypto = require("crypto");
 const timestamp = "1735066639761";
 const payload = JSON.stringify({...});
-const ***REMOVED***;
+const secret = "your-secret";
 const stringToSign = `${timestamp}:${JSON.stringify(payload)}`;
 const signature = crypto.createHmac("sha256", secret)
   .update(stringToSign)

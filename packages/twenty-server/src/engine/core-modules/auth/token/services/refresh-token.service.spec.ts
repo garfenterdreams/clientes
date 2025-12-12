@@ -159,7 +159,7 @@ describe('RefreshTokenService', () => {
           targetedTokenType: 'ACCESS',
         },
         expect.objectContaining({
-          ***REMOVED***,
+          secret: 'mock-secret',
           expiresIn: mockExpiresIn,
           jwtid: 'new-token-id',
         }),

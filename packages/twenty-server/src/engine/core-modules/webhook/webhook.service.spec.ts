@@ -17,7 +17,7 @@ describe('WebhookService', () => {
   const mockWebhook: WebhookEntity = {
     id: mockWebhookId,
     targetUrl: 'https://example.com/webhook',
-    ***REMOVED***,
+    secret: 'webhook-secret',
     operations: ['create', 'update'],
     workspaceId: mockWorkspaceId,
     createdAt: new Date('2024-01-01'),
@@ -209,7 +209,7 @@ describe('WebhookService', () => {
     it('should create and save a webhook with valid target URL', async () => {
       const webhookData = {
         targetUrl: 'https://example.com/webhook',
-        ***REMOVED***,
+        secret: 'webhook-secret',
         operations: ['create', 'update'],
         workspaceId: mockWorkspaceId,
       };
@@ -222,7 +222,7 @@ describe('WebhookService', () => {
       expect(mockWebhookRepository.create).toHaveBeenCalledWith({
         ...webhookData,
         targetUrl: 'https://example.com/webhook',
-        ***REMOVED***,
+        secret: 'webhook-secret',
       });
       expect(mockWebhookRepository.save).toHaveBeenCalledWith(mockWebhook);
       expect(result).toEqual(mockWebhook);

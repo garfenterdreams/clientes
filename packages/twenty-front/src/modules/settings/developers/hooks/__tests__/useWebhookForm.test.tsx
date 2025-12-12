@@ -31,7 +31,7 @@ const createMockWebhookData = (overrides = {}) => ({
   targetUrl: 'https://test.com/webhook',
   operations: ['person.created'],
   description: 'Test webhook',
-  ***REMOVED***,
+  secret: 'test-secret',
   ...overrides,
 });
 
@@ -43,7 +43,7 @@ const createSuccessfulCreateMock = (webhookData = {}) => ({
         targetUrl: 'https://test.com/webhook',
         operations: ['person.created'],
         description: 'Test webhook',
-        ***REMOVED***,
+        secret: 'test-secret',
         ...webhookData,
       },
     },
@@ -64,7 +64,7 @@ const createSuccessfulUpdateMock = (webhookId: string, webhookData = {}) => ({
         targetUrl: 'https://updated.com/webhook',
         operations: ['person.updated'],
         description: 'Updated webhook',
-        ***REMOVED***,
+        secret: 'updated-secret',
         ...webhookData,
       },
     },
@@ -76,7 +76,7 @@ const createSuccessfulUpdateMock = (webhookId: string, webhookData = {}) => ({
         targetUrl: 'https://updated.com/webhook',
         operations: ['person.updated'],
         description: 'Updated webhook',
-        ***REMOVED***,
+        secret: 'updated-secret',
         ...webhookData,
       }),
     },
@@ -171,7 +171,7 @@ describe('useWebhookForm', () => {
         targetUrl: 'https://test.com/webhook',
         description: 'Test webhook',
         operations: [{ object: 'person', action: 'created' }],
-        ***REMOVED***,
+        secret: 'test-secret',
       };
 
       await act(async () => {
@@ -192,7 +192,7 @@ describe('useWebhookForm', () => {
               targetUrl: 'https://test.com/webhook',
               operations: ['person.created'],
               description: 'Test webhook',
-              ***REMOVED***,
+              secret: 'test-secret',
             },
           },
         },
@@ -214,7 +214,7 @@ describe('useWebhookForm', () => {
         targetUrl: 'https://test.com/webhook',
         description: 'Test webhook',
         operations: [{ object: 'person', action: 'created' }],
-        ***REMOVED***,
+        secret: 'test-secret',
       };
 
       await act(async () => {
@@ -251,7 +251,7 @@ describe('useWebhookForm', () => {
           { object: 'company', action: 'updated' },
           { object: null, action: 'test' },
         ],
-        ***REMOVED***,
+        secret: 'test-secret',
       };
 
       await act(async () => {
@@ -309,7 +309,7 @@ describe('useWebhookForm', () => {
         targetUrl: 'https://updated.com/webhook',
         description: 'Updated webhook',
         operations: [{ object: 'person', action: 'updated' }],
-        ***REMOVED***,
+        secret: 'updated-secret',
       };
 
       await act(async () => {
@@ -332,7 +332,7 @@ describe('useWebhookForm', () => {
               targetUrl: 'https://test.com/webhook',
               operations: ['person.created'],
               description: 'Test webhook',
-              ***REMOVED***,
+              secret: 'test-secret',
             },
           },
         },
@@ -358,7 +358,7 @@ describe('useWebhookForm', () => {
         targetUrl: 'https://test.com/webhook',
         description: 'Test webhook',
         operations: [{ object: 'person', action: 'created' }],
-        ***REMOVED***,
+        secret: 'test-secret',
       };
 
       await act(async () => {

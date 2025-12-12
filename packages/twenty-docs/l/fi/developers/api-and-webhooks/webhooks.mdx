@@ -79,7 +79,7 @@ Tässä esimerkki Node.js:ssä:
 const crypto = require("crypto");
 const timestamp = "1735066639761";
 const payload = JSON.stringify({...});
-const ***REMOVED***;
+const secret = "your-secret";
 const stringToSign = `${timestamp}:${JSON.stringify(payload)}`;
 const signature = crypto.createHmac("sha256", secret)
   .update(stringToSign)

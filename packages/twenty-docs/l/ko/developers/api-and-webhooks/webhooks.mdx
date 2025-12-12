@@ -79,7 +79,7 @@ Twenty에서 웹훅을 생성하려면 귀하의 Twenty 앱의 **API 및 웹훅*
 const crypto = require("crypto");
 const timestamp = "1735066639761";
 const payload = JSON.stringify({...});
-const ***REMOVED***;
+const secret = "your-secret";
 const stringToSign = `${timestamp}:${JSON.stringify(payload)}`;
 const signature = crypto.createHmac("sha256", secret)
   .update(stringToSign)

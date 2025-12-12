@@ -24,7 +24,7 @@ describe('Successful User Sign Up (integration)', () => {
   it('should sign up, delete and signup same new user successfully', async () => {
     const input: SignUpInput = {
       email: `test-123@example.com`,
-      ***REMOVED***,
+      password: 'Test123!@#',
     };
 
     const { data: firstSignUpData } = await signUp({

@@ -78,7 +78,7 @@ describe('TransientTokenService', () => {
           workspaceMemberId,
         },
         expect.objectContaining({
-          ***REMOVED***,
+          secret: 'mocked-secret',
           expiresIn: mockExpiresIn,
         }),
       );

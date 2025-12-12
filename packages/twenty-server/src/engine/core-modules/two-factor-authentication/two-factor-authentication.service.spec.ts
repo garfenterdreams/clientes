@@ -25,7 +25,7 @@ const totpStrategyMocks = {
   initiate: jest.fn(() => ({
     uri: 'otpauth://totp/test@example.com?secret=RAW_OTP_SECRET&issuer=Twenty%20-%20Test%20Workspace',
     context: {
-      ***REMOVED***,
+      secret: 'RAW_OTP_SECRET',
       status: 'PENDING',
     },
   })),
@@ -350,7 +350,7 @@ describe('TwoFactorAuthenticationService', () => {
       const existingMethod = {
         id: 'existing_method_id',
         status: 'PENDING',
-        ***REMOVED***,
+        secret: 'corrupted_secret',
         createdAt: recentTime,
       };
 

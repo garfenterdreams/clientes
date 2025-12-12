@@ -42,7 +42,7 @@ describe('transformEventBatchToWebhookEvents', () => {
             after: {
               id: 'id-3',
               nameSingular: 'nameSingular-3',
-              ***REMOVED***,
+              secret: 'secret-3',
             },
             updatedFields: ['nameSingular'],
           },
@@ -59,7 +59,7 @@ describe('transformEventBatchToWebhookEvents', () => {
       {
         id: 'webhook-id-2',
         targetUrl: 'targetUrl-2',
-        ***REMOVED***,
+        secret: 'secret-2',
       },
     ] as WebhookEntity[];
 
@@ -110,7 +110,7 @@ describe('transformEventBatchToWebhookEvents', () => {
         record: {
           id: 'id-3',
           nameSingular: 'nameSingular-3',
-          ***REMOVED***,
+          secret: 'secret-3',
         },
         updatedFields: ['nameSingular'],
         secret: 'secret',
@@ -128,7 +128,7 @@ describe('transformEventBatchToWebhookEvents', () => {
           id: 'id-1',
           nameSingular: 'nameSingular-1',
         },
-        ***REMOVED***,
+        secret: 'secret-2',
       },
       {
         targetUrl: 'targetUrl-2',
@@ -143,7 +143,7 @@ describe('transformEventBatchToWebhookEvents', () => {
           id: 'id-2',
           nameSingular: 'nameSingular-2',
         },
-        ***REMOVED***,
+        secret: 'secret-2',
       },
       {
         targetUrl: 'targetUrl-2',
@@ -157,10 +157,10 @@ describe('transformEventBatchToWebhookEvents', () => {
         record: {
           id: 'id-3',
           nameSingular: 'nameSingular-3',
-          ***REMOVED***,
+          secret: 'secret-3',
         },
         updatedFields: ['nameSingular'],
-        ***REMOVED***,
+        secret: 'secret-2',
       },
     ];
 
@@ -185,7 +185,7 @@ describe('transformEventBatchToWebhookEvents', () => {
             after: {
               id: 'id-1',
               targetUrl: 'targetUrl-1',
-              ***REMOVED***,
+              secret: 'secret-1',
             },
           },
         },

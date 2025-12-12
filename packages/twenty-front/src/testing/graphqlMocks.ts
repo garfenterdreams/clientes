@@ -814,7 +814,7 @@ export const graphqlMocks = {
               targetUrl: 'https://api.slackbot.io/webhooks/twenty',
               operations: ['*.created', '*.updated'],
               description: 'Slack notifications for lead updates',
-              ***REMOVED***,
+              secret: 'sample-secret',
             },
           ],
         },
@@ -831,7 +831,7 @@ export const graphqlMocks = {
             targetUrl: 'https://api.slackbot.io/webhooks/twenty',
             operations: ['*.created', '*.updated'],
             description: 'Slack notifications for lead updates',
-            ***REMOVED***,
+            secret: 'sample-secret',
           },
         },
       });

@@ -72,7 +72,7 @@ describe('useSignInUpForm', () => {
     expect(result.current.form.getValues()).toEqual({
       exist: false,
       email: 'test@test.com',
-      ***REMOVED***,
+      password: 'tim@apple.dev',
       captchaToken: '',
     });
   });

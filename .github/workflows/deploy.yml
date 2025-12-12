@@ -104,20 +104,46 @@ jobs:
         working-directory: garfenter-tests/e2e
         run: npx playwright install --with-deps chromium
 
-      - name: Wait for deployment propagation
+      - name: Start Clientes container and wait for readiness
         run: |
-          echo "Waiting 60 seconds for new image to be pulled and deployed..."
+          echo "Starting Clientes container via startup API..."
+          # Trigger container startup (on-demand architecture)
+          curl -sf -X POST "https://clientes.garfenter.com/api/start/clientes" || echo "Startup API call completed"
+
+          echo "Waiting for container to initialize (90 seconds - Twenty CRM needs more time)..."
+          sleep 90
+
+          # Pull latest image on EC2 if available
+          echo "Triggering image pull..."
+          curl -sf -X POST "https://clientes.garfenter.com/api/deploy/clientes" || echo "Deploy API call completed"
+
+          # Wait for container to fully start with database migrations
+          echo "Waiting additional 60 seconds for migrations..."
           sleep 60
 
-          # Health check before running tests
-          echo "Verifying clientes.garfenter.com is accessible..."
-          for i in {1..5}; do
-            if curl -sf --connect-timeout 10 "${{ env.CLIENTES_URL }}/healthz" > /dev/null 2>&1; then
-              echo "Health endpoint is responding"
+          # Health check - verify actual health response (not startup page)
+          echo "Verifying clientes.garfenter.com is actually running..."
+          MAX_ATTEMPTS=10
+          for i in $(seq 1 $MAX_ATTEMPTS); do
+            HTTP_CODE=$(curl -sf -o /dev/null -w "%{http_code}" --connect-timeout 15 "${{ env.CLIENTES_URL }}/healthz" 2>&1 || echo "000")
+            BODY=$(curl -sf --connect-timeout 15 "${{ env.CLIENTES_URL }}/healthz" 2>&1 || echo "FAILED")
+
+            # Check if response is OK (not HTML startup page)
+            if [ "$HTTP_CODE" = "200" ] && ! echo "$BODY" | grep -q "Starting clientes"; then
+              echo "Health endpoint is responding correctly"
+              echo "Response code: $HTTP_CODE"
               break
             fi
-            echo "Attempt $i failed, retrying in 10 seconds..."
-            sleep 10
+
+            if [ $i -eq $MAX_ATTEMPTS ]; then
+              echo "ERROR: Container not responding after $MAX_ATTEMPTS attempts"
+              echo "Last HTTP code: $HTTP_CODE"
+              echo "Last response: $BODY"
+              exit 1
+            fi
+
+            echo "Attempt $i/$MAX_ATTEMPTS: Container not ready (code: $HTTP_CODE), waiting 15 seconds..."
+            sleep 15
           done
 
       - name: Run E2E Smoke Tests

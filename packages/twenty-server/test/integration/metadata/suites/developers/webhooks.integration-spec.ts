@@ -50,7 +50,7 @@ describe('webhooksResolver (e2e)', () => {
         targetUrl: 'https://example.com/webhook',
         operations: ['person.created', 'company.updated'],
         description: 'Test webhook',
-        ***REMOVED***,
+        secret: 'test-secret',
       };
 
       const response = await makeMetadataAPIRequest({
@@ -91,7 +91,7 @@ describe('webhooksResolver (e2e)', () => {
         targetUrl: 'invalid-url',
         operations: ['person.created'],
         description: 'Test webhook',
-        ***REMOVED***,
+        secret: 'test-secret',
       };
 
       const response = await makeMetadataAPIRequest({
@@ -136,7 +136,7 @@ describe('webhooksResolver (e2e)', () => {
             targetUrl: 'https://example.com/webhook',
             operations: ['person.created'],
             description: 'Test webhook',
-            ***REMOVED***,
+            secret: 'test-secret',
           },
         },
       });
@@ -150,7 +150,7 @@ describe('webhooksResolver (e2e)', () => {
         targetUrl: 'https://updated.com/webhook',
         operations: ['person.updated', 'company.created'],
         description: 'Updated webhook',
-        ***REMOVED***,
+        secret: 'updated-secret',
       };
 
       const updateResponse = await makeMetadataAPIRequest({
@@ -203,7 +203,7 @@ describe('webhooksResolver (e2e)', () => {
             targetUrl: 'https://example.com/webhook',
             operations: ['person.created'],
             description: 'Test webhook',
-            ***REMOVED***,
+            secret: 'test-secret',
           },
         },
       });
@@ -263,7 +263,7 @@ describe('webhooksResolver (e2e)', () => {
             targetUrl: 'https://example.com/webhook',
             operations: ['person.created'],
             description: 'Test webhook',
-            ***REMOVED***,
+            secret: 'test-secret',
           },
         },
       });

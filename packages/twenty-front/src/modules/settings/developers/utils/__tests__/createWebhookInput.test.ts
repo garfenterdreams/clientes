@@ -14,7 +14,7 @@ describe('createWebhookInput', () => {
       { object: 'company', action: 'updated' },
       { object: null, action: 'test' }, // should be filtered out
     ],
-    ***REMOVED***,
+    secret: 'test-secret',
   };
 
   describe('createWebhookCreateInput', () => {
@@ -25,7 +25,7 @@ describe('createWebhookInput', () => {
         targetUrl: 'https://test.com/webhook',
         operations: ['person.created', 'company.updated'],
         description: 'Test webhook',
-        ***REMOVED***,
+        secret: 'test-secret',
       });
     });
 
@@ -51,7 +51,7 @@ describe('createWebhookInput', () => {
         targetUrl: 'https://test.com/webhook',
         operations: ['person.created', 'company.updated'],
         description: 'Test webhook',
-        ***REMOVED***,
+        secret: 'test-secret',
       });
     });
 

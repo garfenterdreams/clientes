@@ -205,7 +205,7 @@ describe('AuthService', () => {
     const workspace = { isPasswordAuthEnabled: true } as WorkspaceEntity;
     const user = {
       email: 'email',
-      ***REMOVED***,
+      password: 'password',
       captchaToken: 'captchaToken',
     };
 
@@ -224,7 +224,7 @@ describe('AuthService', () => {
     const response = await service.validateLoginWithPassword(
       {
         email: 'email',
-        ***REMOVED***,
+        password: 'password',
         captchaToken: 'captchaToken',
       },
       workspace,
@@ -269,7 +269,7 @@ describe('AuthService', () => {
     const response = await service.validateLoginWithPassword(
       {
         email: 'email',
-        ***REMOVED***,
+        password: 'password',
         captchaToken: 'captcha-token',
       },
       workspace,
@@ -309,7 +309,7 @@ describe('AuthService', () => {
       service.validateLoginWithPassword(
         {
           email: 'email',
-          ***REMOVED***,
+          password: 'password',
           captchaToken: 'captcha-token',
         },
         workspace,
@@ -326,7 +326,7 @@ describe('AuthService', () => {
   it('challenge - user who have an invitation', async () => {
     const user = {
       email: 'email',
-      ***REMOVED***,
+      password: 'password',
       captchaToken: 'captchaToken',
     };
 
@@ -358,7 +358,7 @@ describe('AuthService', () => {
     const response = await service.validateLoginWithPassword(
       {
         email: 'email',
-        ***REMOVED***,
+        password: 'password',
         captchaToken: 'captchaToken',
       },
       {

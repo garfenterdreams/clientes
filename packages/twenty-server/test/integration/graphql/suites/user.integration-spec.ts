@@ -89,7 +89,7 @@ describe('deleteUser', () => {
     const testEmail = `test_user_${Date.now()}@example.com`;
     const signUpMutation = signUpOperationFactory({
       email: testEmail,
-      ***REMOVED***,
+      password: 'Password123!',
     });
 
     const signUpResponse = await client.post('/graphql').send(signUpMutation);

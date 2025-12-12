@@ -142,7 +142,7 @@ describe('ActivityQueryResultGetterHandler', () => {
           backgroundColor: 'default',
           textAlignment: 'left',
           name: '20240529_123208.jpg',
-          url: 'https://my-domain.twenty.com/files/attachment/***REMOVED***/e45cb48a-362f-4e8f-b913-c92b5e3e0aa6.jpg',
+          url: 'https://my-domain.twenty.com/files/attachment/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlbmFtZSI6ImU0NWNiNDhhLTM2MmYtNGU4Zi1iOTEzLWM5MmI1ZTNlMGFhNi5qcGciLCJ3b3Jrc3BhY2VJZCI6IjIwMjAyMDIwLTFjMjUtNGQwMi1iZjI1LTZhZWNjZjdlYTQxOSIsInN1YiI6IjIwMjAyMDIwLTFjMjUtNGQwMi1iZjI1LTZhZWNjZjdlYTQxOSIsInR5cGUiOiJGSUxFIiwiaWF0IjoxNzUwNDI4NDQ1LCJleHAiOjE3NTA1MTQ4NDV9.qTN1b9IcmZvfVAqt1UlfJ_nn3GwIAEp7G9IoPtRJDxk/e45cb48a-362f-4e8f-b913-c92b5e3e0aa6.jpg',
           caption: '',
           showPreview: true,
         },

@@ -18,7 +18,7 @@ export const configVariableMaskSensitiveData = (
         const url = new URL(value);
 
         if (url.password) {
-          url.***REMOVED***;
+          url.password = '********';
         }
         if (url.username) {
           url.username = '********';

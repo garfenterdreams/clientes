@@ -30,7 +30,7 @@ describe('Successful user and workspace creation', () => {
     const { data } = await signUp({
       input: {
         email: `test-1234@example.com`,
-        ***REMOVED***,
+        password: 'Test123!@#',
       },
 
       expectToFail: false,
@@ -124,7 +124,7 @@ describe('Successful user and workspace creation', () => {
     const { data } = await signUp({
       input: {
         email: `test-delete-5678@example.com`,
-        ***REMOVED***,
+        password: 'Test123!@#',
       },
       expectToFail: false,
     });
